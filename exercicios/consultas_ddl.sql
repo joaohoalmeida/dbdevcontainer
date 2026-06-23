@@ -18,7 +18,7 @@ CREATE TABLE consultas.paciente(
 
     CONSTRAINT fk_paciente 
         FOREIGN KEY (cpf_pessoa) 
-        REFERENCES pessoas(cpf)
+        REFERENCES consultas.pessoas(cpf)
         ON DELETE CASCADE
 );
 
@@ -28,31 +28,31 @@ CREATE TABLE consultas.medico(
 
     CONSTRAINT fk_medico 
         FOREIGN KEY (cpf_pessoa) 
-        REFERENCES pessoas(cpf)
+        REFERENCES consultas.pessoas(cpf)
         ON DELETE CASCADE
 );
 
 CREATE TABLE consultas.agendamento(
     cpf_paciente varchar(11) NOT NULL,
     cpf_medico varchar(11) NOT NULL,
-    dh_consulta date NOT NULL,
-    dh_agendamento date NOT NULL,
+    dh_consulta timestamp NOT NULL,
+    dh_agendamento timestamp NOT NULL,
     valor_consulta float NOT NULL DEFAULT (0.0)
 
     CONSTRAINT fk_paciente 
         FOREIGN KEY (cpf_paciente) 
-        REFERENCES pessoas(cpf)
+        REFERENCES consultas.pessoas(cpf)
         ON DELETE CASCADE
 
     CONSTRAINT fk_medico
         FOREIGN KEY (cpf_medico) 
-        REFERENCES pessoas(cpf)
+        REFERENCES consultas.pessoas(cpf)
         ON DELETE CASCADE
 );
 
 CREATE TABLE consultas.especialidade(
     id SERIAL PRIMARY KEY,
-    descricao varchar(300) NOT NULL,
+    descricao varchar(300) NOT NULL
 );
 
 CREATE TABLE consultas.medico_especialidade(
@@ -61,12 +61,12 @@ CREATE TABLE consultas.medico_especialidade(
 
     CONSTRAINT fk_medico
         FOREIGN KEY (cpf_pmedico) 
-        REFERENCES pessoas(cpf)
+        REFERENCES consultas.pessoas(cpf)
         ON DELETE CASCADE
 
     CONSTRAINT fk_especialidade
         FOREIGN KEY (id_especialidade) 
-        REFERENCES especialidade(id)
+        REFERENCES consultas.especialidade(id)
         ON DELETE CASCADE
 );
 
