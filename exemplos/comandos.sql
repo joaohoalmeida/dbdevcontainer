@@ -28,3 +28,11 @@ order by sequence_name;
 */
 
 select setval('dbex.cliente_id_seq',1);
+
+create schema dbex;
+
+CREATE TABLE dbex.cidades (
+    id serial PRIMARY KEY,
+    nome varchar(150) NOT NULL,
+    estado char(2) NOT NULL
+);
