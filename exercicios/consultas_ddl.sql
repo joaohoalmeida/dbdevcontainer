@@ -44,4 +44,30 @@ CREATE TABLE consultas.agendamento(
         REFERENCES consultas.paciente(cpf_pessoa)
         ON DELETE CASCADE,
         
-    CONSTRAINT fk_
+    CONSTRAINT fk_medico
+        FOREIGN KEY (cpf_medico) 
+        REFERENCES consultas.medico(cpf_pessoa)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE consultas.especialidade(
+    id SERIAL PRIMARY KEY,
+    descricao varchar(300) NOT NULL
+);
+
+CREATE TABLE consultas.medico_especialidade(
+    cpf_medico varchar(11) NOT NULL,
+    id_especialidade int NOT NULL,
+    
+    CONSTRAINT pk_medico_especialidade PRIMARY KEY (cpf_medico, id_especialidade),
+    
+    CONSTRAINT fk_medico
+        FOREIGN KEY (cpf_medico) 
+        REFERENCES consultas.medico(cpf_pessoa) 
+        ON DELETE CASCADE,
+        
+    CONSTRAINT fk_especialidade
+        FOREIGN KEY (id_especialidade) 
+        REFERENCES consultas.especialidade(id)
+        ON DELETE CASCADE
+);
