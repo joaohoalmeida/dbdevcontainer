@@ -25,15 +25,15 @@ INSERT INTO consultas.especialidade(descricao)
         ('Ortopedista'); 
 
 INSERT INTO consultas.medico_especialidade(cpf_medico, id_especialidade)
-  VALUES('001', '01'),
-        ('004', '02'),
-        ('004', '03');
+  VALUES('001', 1),
+        ('004', 2),
+        ('004', 3);
 
-INSERT INTO consultas.agendamento(cpf_paciente varchar, cpf_medico, dh_consulta, dh_agendamento, valor_consulta)
-  VALUES ('002', '001', '14-04-1782', '16:00:00', '14-03-1782', '10:04:45', '80'),
-         ('002', '004', '15-04-1782', '10:00:00', '14-03-1782', '10:04:45', '100'),
-         ('002', '004', '17-05-1783', '08:00:00', '10-05-1783', '16:32:00', '100'),
-         ('003', '001', '17-05-1783', '08:30:00', '09-05-1783', '09:05:56', '0'),
+INSERT INTO consultas.agendamento(cpf_paciente, cpf_medico, dh_consulta, dh_agendamento, valor_consulta)
+  VALUES ('002', '001', '14-04-1782', '16:00:00', '14-03-1782', '10:04:45', 80),
+         ('002', '004', '15-04-1782', '10:00:00', '14-03-1782', '10:04:45', 100),
+         ('002', '004', '17-05-1783', '08:00:00', '10-05-1783', '16:32:00', 100),
+         ('003', '001', '17-05-1783', '08:30:00', '09-05-1783', '09:05:56', 0),
 
 -- QUESTÃO 2
 -- Atualizar a data de nascimento de "D João VI", ele nasceu em "01-12-1416".
@@ -67,3 +67,27 @@ UPDATE consultas.agendamento
 UPDATE consultas.medico_especialidade
   SET id_especialidade = '01'
   WHERE cpf_medico = '004' and id_especialidade = '02';
+
+
+-- QUESTÃO 3
+-- O paciente "Pedro I" cancelou a consulta agendada para o dia "19-05-1783".
+ 
+DELETE from consultas.agendamento 
+  WHERE dh_consulta = '19-05-1783' and cpf_paciente = '002';
+
+-- Remover os agendamentos com o médico "D João VI" com o custo de R$ 0,00. Utilize essas duas condições no comando DELETE.
+
+DELETE from consultas.agendamento
+  WHERE cpf_medico = '001' and valor_consulta = 0;
+
+-- Remover os pacientes que possuem plano de saúde ou que não possuem telefone.
+
+DELETE from consultas.paciente
+  USING consultas.pessoa
+  WHERE consultas.pessoa.cpf = consultas.paciente.cpf
+  AND (consultas.paciente.plano_saude = true) or (consultas.pessoa.telefone = null);
+
+-- O médico "JJ Xavier" deve ser removido da base de dados.
+
+DELETE from consultas.pessoa
+  WHERE cpf = '004';
