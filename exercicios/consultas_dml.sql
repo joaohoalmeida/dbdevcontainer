@@ -1,3 +1,4 @@
+-- QUESTÃO 1
 -- Cadastrar os elementos segundo as especificações abaixo (Comandos INSERT).
 
 INSERT INTO consultas.pessoa(nome, email, cpf, data_nasc, endereco, telefone)
@@ -34,7 +35,7 @@ INSERT INTO consultas.agendamento(cpf_paciente varchar, cpf_medico, dh_consulta,
          ('002', '004', '17-05-1783', '08:00:00', '10-05-1783', '16:32:00', '100'),
          ('003', '001', '17-05-1783', '08:30:00', '09-05-1783', '09:05:56', '0'),
 
-
+-- QUESTÃO 2
 -- Atualizar a data de nascimento de "D João VI", ele nasceu em "01-12-1416".
 
 UPDATE consultas.pessoa
@@ -60,3 +61,9 @@ UPDATE consultas.agendamento
   SET dh_consulta = '19-05-1783',
       valor_consulta = '150',
   WHERE dh_consulta = '17-05-1783';
+
+-- O médico "JJ Xavier" não atenderá como "Cardiologista", somente como "Pediatra" e também "Ortopedista".
+
+UPDATE consultas.medico_especialidade
+  SET id_especialidade = '01'
+  WHERE cpf_medico = '004' and id_especialidade = '02';
