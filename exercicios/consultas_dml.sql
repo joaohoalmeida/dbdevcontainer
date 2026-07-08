@@ -35,3 +35,28 @@ INSERT INTO consultas.agendamento(cpf_paciente varchar, cpf_medico, dh_consulta,
          ('003', '001', '17-05-1783', '08:30:00', '09-05-1783', '09:05:56', '0'),
 
 
+-- Atualizar a data de nascimento de "D João VI", ele nasceu em "01-12-1416".
+
+UPDATE consultas.pessoa
+  SET data_nasc = '01-12-1416'
+  WHERE cpf = '001';
+
+-- Atualizar o telefone e e-mail de "D Pedro I" para "5503" e "pf@email.com" , respectivamente.
+
+UPDATE consultas.pessoa
+  SET telefone = '5503',
+      email = 'pf@email.com'
+  WHERE cpf = '002';
+
+-- Atualizar os números de telefone adicionando um dígito "9" no início. Por exemplo, o número "5501" será atualizado para "95501". 
+
+UPDATE consultas.pessoa
+  SET telefone = 9 || telefone
+  WHERE telefone is NOT NULL;
+
+-- As consultas do dia "17-05-1783" devem ser adiadas para o dia "19-05-1783", e o valor das consultas alteradas para R$ 150,00.
+
+UPDATE consultas.agendamento
+  SET dh_consulta = '19-05-1783',
+      valor_consulta = '150',
+  WHERE dh_consulta = '17-05-1783';
