@@ -7,11 +7,11 @@ INSERT INTO consultas.pessoa(nome, email, cpf, data_nasc, endereco, telefone)
          ('D João VI', 'dj@email.com', '001', '01-12-1415', 'R. Portugal', NULL),
          ('JJ Xavier', 'jj@email.com', '004', '12-11-1746', 'R. Minas', '5502');
 
-INSERT INTO consultas.paciente(cpf, senha, plano_saude)
+INSERT INTO consultas.paciente(cpf_pessoa, senha, plano_saude)
   VALUES('002', 'senha1', false),
         ('003', 'senha2', true);
 
-INSERT INTO consultas.medico(cpf, crm)
+INSERT INTO consultas.medico(cpf_pessoa, crm)
   VALUES('001', 111),
         ('004', 112);
 
@@ -59,7 +59,7 @@ UPDATE consultas.pessoa
 
 UPDATE consultas.agendamento
   SET dh_consulta = '19-05-1783',
-      valor_consulta = '150',
+      valor_consulta = '150'
   WHERE dh_consulta = '17-05-1783';
 
 -- O médico "JJ Xavier" não atenderá como "Cardiologista", somente como "Pediatra" e também "Ortopedista".
@@ -82,10 +82,13 @@ DELETE from consultas.agendamento
 
 -- Remover os pacientes que possuem plano de saúde ou que não possuem telefone.
 
-DELETE from consultas.paciente
-  USING consultas.pessoa
-  WHERE consultas.pessoa.cpf = consultas.paciente.cpf
-  AND (consultas.paciente.plano_saude = true) or (consultas.pessoa.telefone = null);
+DELETE FROM consultas.paciente
+WHERE plano_saude = true 
+   OR cpf_pessoa IN (
+       SELECT cpf 
+       FROM consultas.pessoa 
+       WHERE telefone IS NULL
+   );
 
 -- O médico "JJ Xavier" deve ser removido da base de dados.
 
