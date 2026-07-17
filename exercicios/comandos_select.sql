@@ -10,6 +10,9 @@ SELECT nome, email, data_nasc from consultas.pessoa
 
 
 --Listar nome, e-mail e idade das pessoas cadastradas.
+
+SELECT nome, email, AGE(NOW(), data_nasc) as idade from consultas.pessoa
+
 --Listar a quantidade de agendamentos.
 --Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
 --Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
