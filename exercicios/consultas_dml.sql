@@ -15,10 +15,6 @@ INSERT INTO consultas.medico(cpf_pessoa, crm)
   VALUES('001', 111),
         ('004', 112);
 
-INSERT INTO consultas.medico(cpf, crm)
-  VALUES('001', 111),
-        ('004', 112);
-
 INSERT INTO consultas.especialidade(descricao)
   VALUES('Pediatra'), 
         ('Cardiologista'),
@@ -30,10 +26,10 @@ INSERT INTO consultas.medico_especialidade(cpf_medico, id_especialidade)
         ('004', 3);
 
 INSERT INTO consultas.agendamento(cpf_paciente, cpf_medico, dh_consulta, dh_agendamento, valor_consulta)
-  VALUES ('002', '001', '14-04-1782', '16:00:00', '14-03-1782', '10:04:45', 80),
-         ('002', '004', '15-04-1782', '10:00:00', '14-03-1782', '10:04:45', 100),
-         ('002', '004', '17-05-1783', '08:00:00', '10-05-1783', '16:32:00', 100),
-         ('003', '001', '17-05-1783', '08:30:00', '09-05-1783', '09:05:56', 0),
+  VALUES ('002', '001', '14-04-1782 16:00:00', '14-03-1782 10:04:45', 80),
+         ('002', '004', '15-04-1782 10:00:00', '14-03-1782 10:04:45', 100),
+         ('002', '004', '17-05-1783 08:00:00', '10-05-1783 16:32:00', 100),
+         ('003', '001', '17-05-1783 08:30:00', '09-05-1783 09:05:56', 0);
 
 -- QUESTÃO 2
 -- Atualizar a data de nascimento de "D João VI", ele nasceu em "01-12-1416".
@@ -49,31 +45,31 @@ UPDATE consultas.pessoa
       email = 'pf@email.com'
   WHERE cpf = '002';
 
--- Atualizar os números de telefone adicionando um dígito "9" no início. Por exemplo, o número "5501" será atualizado para "95501". 
+-- Atualizar os números de telefone adicionando um dígito "9" no início. Por exemplo, o número "5501" será updated para "95501". 
 
 UPDATE consultas.pessoa
-  SET telefone = 9 || telefone
+  SET telefone = '9' || telefone
   WHERE telefone is NOT NULL;
 
 -- As consultas do dia "17-05-1783" devem ser adiadas para o dia "19-05-1783", e o valor das consultas alteradas para R$ 150,00.
 
 UPDATE consultas.agendamento
-  SET dh_consulta = '19-05-1783',
-      valor_consulta = '150'
-  WHERE dh_consulta = '17-05-1783';
+  SET dh_consulta = '19-05-1783 08:00:00',
+      valor_consulta = 150
+  WHERE dh_consulta LIKE '17-05-1783%';
 
 -- O médico "JJ Xavier" não atenderá como "Cardiologista", somente como "Pediatra" e também "Ortopedista".
 
 UPDATE consultas.medico_especialidade
-  SET id_especialidade = '01'
-  WHERE cpf_medico = '004' and id_especialidade = '02';
+  SET id_especialidade = 1
+  WHERE cpf_medico = '004' and id_especialidade = 2;
 
 
 -- QUESTÃO 3
 -- O paciente "Pedro I" cancelou a consulta agendada para o dia "19-05-1783".
  
 DELETE from consultas.agendamento 
-  WHERE dh_consulta = '19-05-1783' and cpf_paciente = '002';
+  WHERE dh_consulta LIKE '19-05-1783%' and cpf_paciente = '002';
 
 -- Remover os agendamentos com o médico "D João VI" com o custo de R$ 0,00. Utilize essas duas condições no comando DELETE.
 
@@ -92,5 +88,7 @@ WHERE plano_saude = true
 
 -- O médico "JJ Xavier" deve ser removido da base de dados.
 
-DELETE from consultas.pessoa
-  WHERE cpf = '004';
+DELETE from consultas.medico_especialidade WHERE cpf_medico = '004';
+DELETE from consultas.agendamento WHERE cpf_medico = '004';
+DELETE from consultas.medico WHERE cpf_pessoa = '004';
+DELETE from consultas.pessoa WHERE cpf = '004';
