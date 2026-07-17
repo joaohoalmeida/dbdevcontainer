@@ -1,0 +1,18 @@
+--Listar todos os dados de todas as pessoas cadastradas.
+--Listar nome, e-mail e data de nascimento das pessoas cadastradas.
+--Listar nome, e-mail e data de nascimento da 3a à 8a pessoa cadastrada.
+--Listar nome, e-mail e idade das pessoas cadastradas.
+--Listar a quantidade de agendamentos.
+--Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
+--Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
+--Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
+--Listar cpf, nome e e-mail dos pacientes que não possuem telefone.
+--Listar a data das consultas cujo o valor está entre R$ 50.00 e R$ 100.00.
+--Listar cpf, nome e e-mail dos pacientes que moram em "Natal".
+--Listar cpf, nome, e-mail e data de nascimento dos pacientes ordenados pela data de nascimento.
+--Listar a quantidade de pacientes que não possuem plano de saúde.
+--Listar o maior e o menor valor das consultas agendadas para cada dia que contém consulta.
+--Listar a média dos valores das consultas agendadas para o mês de Dezembro.
+--Listar nome e e-mail das pessoas que agendaram alguma consulta para o dia do seu aniversário.
+--Listar o nome, e-mail, cpf dos médicos e as suas respectivas especialidades.
+--Listar a quantidade de consultas para cada médico.
