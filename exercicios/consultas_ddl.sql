@@ -38,6 +38,9 @@ CREATE TABLE consultas.agendamento(
     dh_consulta timestamp NOT NULL,
     dh_agendamento timestamp NOT NULL,
     valor_consulta float NOT NULL DEFAULT (0.0),
+
+
+    CONSTRAINT pk_agendamento PRIMARY KEY (cpf_paciente, cpf_medico, dh_consulta)
     
     CONSTRAINT fk_paciente 
         FOREIGN KEY (cpf_paciente) 
