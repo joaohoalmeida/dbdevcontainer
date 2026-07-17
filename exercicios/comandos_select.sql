@@ -1,6 +1,14 @@
 --Listar todos os dados de todas as pessoas cadastradas.
+
+SELECT * FROM consultas.pessoa
+
 --Listar nome, e-mail e data de nascimento das pessoas cadastradas.
+
+SELECT nome, email, data_nasc from consultas.pessoa 
+
 --Listar nome, e-mail e data de nascimento da 3a à 8a pessoa cadastrada.
+
+
 --Listar nome, e-mail e idade das pessoas cadastradas.
 --Listar a quantidade de agendamentos.
 --Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
