@@ -1,3 +1,8 @@
+# Integrantes
+* João Heli
+*  Mateus Rocha
+*   Ryan Almeida
+
 # Diagrama Relacional
 
 ![Diagrama ER](./diagrama_er.png)
