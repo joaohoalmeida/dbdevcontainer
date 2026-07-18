@@ -1,34 +1,34 @@
 CREATE TABLE USUARIO
 (
-  cpf INT NOT NULL,
-  nome INT NOT NULL,
+  cpf CHAR(11) NOT NULL,
+  nome VARCHAR(100) NOT NULL,
   PRIMARY KEY (cpf)
 );
 
 CREATE TABLE VENDEDOR
 (
-  cnpj INT NOT NULL,
-  nome INT NOT NULL,
-  logo INT NOT NULL,
+  cnpj CHAR(14) NOT NULL,
+  nome VARCHAR(150) NOT NULL,
+  logo VARCHAR(255),
   PRIMARY KEY (cnpj)
 );
 
 CREATE TABLE LEILOEIRO
 (
-  cpf INT NOT NULL,
-  nome INT NOT NULL,
+  cpf CHAR(11) NOT NULL,
+  nome VARCHAR(100) NOT NULL,
   PRIMARY KEY (cpf)
 );
 
 CREATE TABLE LEILAO
 (
-  data_hora_inicio INT NOT NULL,
-  data_hora_fim INT NOT NULL,
   id_leilao INT NOT NULL,
-  nome INT NOT NULL,
-  descricao INT NOT NULL,
-  cnpj INT NOT NULL,
-  cpf INT NOT NULL,
+  nome VARCHAR(150) NOT NULL,
+  descricao TEXT,
+  data_hora_inicio DATETIME NOT NULL,
+  data_hora_fim DATETIME NOT NULL,
+  cnpj CHAR(14) NOT NULL,
+  cpf CHAR(11) NOT NULL,
   PRIMARY KEY (id_leilao),
   FOREIGN KEY (cnpj) REFERENCES VENDEDOR(cnpj),
   FOREIGN KEY (cpf) REFERENCES LEILOEIRO(cpf)
@@ -37,19 +37,19 @@ CREATE TABLE LEILAO
 CREATE TABLE CATEGORIA
 (
   id_categoria INT NOT NULL,
-  nome INT NOT NULL,
-  descricao INT NOT NULL,
+  nome VARCHAR(100) NOT NULL,
+  descricao TEXT,
   PRIMARY KEY (id_categoria)
 );
 
 CREATE TABLE LOTE
 (
-  arrematado INT NOT NULL,
-  lance_minimo INT NOT NULL,
-  nome INT NOT NULL,
-  descricao INT NOT NULL,
   id_lote INT NOT NULL,
-  data_hora_fim INT NOT NULL,
+  nome VARCHAR(150) NOT NULL,
+  descricao TEXT,
+  arrematado BOOLEAN NOT NULL,
+  lance_minimo DECIMAL(15,2) NOT NULL,
+  data_hora_fim DATETIME NOT NULL,
   id_leilao INT NOT NULL,
   id_categoria INT NOT NULL,
   PRIMARY KEY (id_lote),
@@ -59,35 +59,35 @@ CREATE TABLE LOTE
 
 CREATE TABLE OFERECE_LANCE
 (
-  lance INT NOT NULL,
-  data_hora_lance INT NOT NULL,
-  id_lance INT NOT NULL,
-  cpf INT NOT NULL,
+  cpf CHAR(11) NOT NULL,
   id_lote INT NOT NULL,
-  PRIMARY KEY (cpf, id_lote),
+  id_lance INT NOT NULL,
+  lance DECIMAL(15,2) NOT NULL,
+  data_hora_lance DATETIME NOT NULL,
+  PRIMARY KEY (cpf, id_lote, id_lance),
   FOREIGN KEY (cpf) REFERENCES USUARIO(cpf),
   FOREIGN KEY (id_lote) REFERENCES LOTE(id_lote)
 );
 
 CREATE TABLE USUARIO_TELEFONE
 (
-  telefone INT NOT NULL,
-  cpf INT NOT NULL,
+  telefone VARCHAR(20) NOT NULL,
+  cpf CHAR(11) NOT NULL,
   PRIMARY KEY (telefone, cpf),
   FOREIGN KEY (cpf) REFERENCES USUARIO(cpf)
 );
 
 CREATE TABLE USUARIO_ENDERECO
 (
-  endereco INT NOT NULL,
-  cpf INT NOT NULL,
+  endereco VARCHAR(200) NOT NULL,
+  cpf CHAR(11) NOT NULL,
   PRIMARY KEY (endereco, cpf),
   FOREIGN KEY (cpf) REFERENCES USUARIO(cpf)
 );
 
 CREATE TABLE LOTE_ENDERECO
 (
-  endereco INT NOT NULL,
+  endereco VARCHAR(200) NOT NULL,
   id_lote INT NOT NULL,
   PRIMARY KEY (endereco, id_lote),
   FOREIGN KEY (id_lote) REFERENCES LOTE(id_lote)
