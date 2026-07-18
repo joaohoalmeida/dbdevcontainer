@@ -1,0 +1,10 @@
+--Listar o nome, e-mail e crm dos médicos.
+--Listar o nome, e-mail e senha dos pacientes.
+--Listar os CRM dos médicos e as descrições das suas respectivas especialidades.
+--Listar o crm de todos os médicos cardiologistas.
+--Listar o nome, CPF, crm e senha dos pacientes que também são médicos.
+--Listar o nome dos médicos e as respectivas quantidades de consultas agendadas. Observem que alguns médicos podem não ter consulta agendada.
+--Listar as especialidades e a quantidade de médicos cadastrados nessa especialidade. Observem que algumas especialidades podem não ter médicos associados.
+--Listar os dados dos agendamentos, exibindo: (a) o nome e e-mail do paciente, (b) data/hora e valor da consulta, e (c) o nome e crm dos médicos.
+--Listar a data/hora das consultas agendadas para todos os cardiologistas  cadastrados.  
+--Listar o nome e CRM dos médicos e a média das suas consultas agendadas para o mês de dezembro/2020.
