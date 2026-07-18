@@ -19,9 +19,16 @@ SELECT COUNT(*) from consultas.agendamento
 
 --Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
 
+
 --Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
 
+SELECT nome, cpf, email from consultas.pessoa
+  WHERE cpf IN (SELECT cpf FROM consultas.paciente WHERE plano_saude = false) 
+
 --Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
+
+SELECT * from consultas.agendamento
+  WHERE YEAR from dh_consulta = 
 
 --Listar cpf, nome e e-mail dos pacientes que não possuem telefone.
 
@@ -35,13 +42,34 @@ SELECT dh_consulta from consultas.agendamento
 
 --Listar cpf, nome e e-mail dos pacientes que moram em "Natal".
 
-SELECT cpf, nome, email FROM consultas.pessoa 
+SELECT cpf, nome, email from consultas.pessoa 
   WHERE endereco LIKE '%Natal%'
 
 --Listar cpf, nome, e-mail e data de nascimento dos pacientes ordenados pela data de nascimento.
+
+SELECT cpf, nome, email, data_nasc from consultas.pessoa
+  ORDER BY data_nasc ASC
+
 --Listar a quantidade de pacientes que não possuem plano de saúde.
+
+SELECT COUNT(*) from consultas.paciente
+  WHERE plano_saude = false
+  
 --Listar o maior e o menor valor das consultas agendadas para cada dia que contém consulta.
+  
 --Listar a média dos valores das consultas agendadas para o mês de Dezembro.
+
+  
+
+  
 --Listar nome e e-mail das pessoas que agendaram alguma consulta para o dia do seu aniversário.
+
+SELECT nome, email from consultas.pessoa
+  WHERE 
+
 --Listar o nome, e-mail, cpf dos médicos e as suas respectivas especialidades.
+
+select nome, email, cpf from consultas.pessoa
+  WHERE cpf IN (SELECT cpf from consulta.medico 
+
 --Listar a quantidade de consultas para cada médico.
