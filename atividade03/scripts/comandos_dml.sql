@@ -7,7 +7,7 @@ INSERT INTO usuario (cpf, nome)
          ('55555555555', 'Elaine Costa');
 
 -- Insert na tabela VENDEDOR
-INSERT INTO vendedor (cpf, nome, logo)
+INSERT INTO vendedor (cnpj, nome, logo)
   VALUES ('10000000000101', 'Leilões Norte Ltda', 'logo_norte.png'),
          ('10000000000102', 'Casa de Leilões Sul', 'logo_sul.png'),
          ('10000000000103', 'Antiguidades Brasil', 'logo_antiguidades.png'),
@@ -79,20 +79,20 @@ INSERT INTO LOTE_ENDERECO (endereco, id_lote)
            ('Sítio Boa Vista, Estrada Rural km 5 - RN', 5);
 
 -- B2. Um comando UPDATE para atualizar um campo de todos os registros de uma tabela.
--- Reajusta em 10% todos os lances mínimos
+-- Seta todos os lotes como arrematados
 UPDATE LOTE
-  SET lance_minimo = lance_minimo * 1.10;
+  SET arrematado = TRUE;
 
 -- B3. Um comando UPDATE para atualizar um campo dos registros que satisfazem uma condição simples.
--- Atualiza todos os lances mínimos abaixo de R% 900,00 para R% 1000,00
+-- Atualiza todos os lances mínimos abaixo de R$ 900,00 para R$ 1000,00
 UPDATE LOTE
   SET lance_minimo = 1000
   WHERE lance_minimo < 900;
 
 -- B4. Um comando UPDATE para atualizar um campo dos registros que satisfazer uma condição composta.
--- Atualiza o status do lote se o valor mínimo for maior que R% 1000,00 e pertencer a categoria veículos.
+-- Atualiza o status do lote se o valor mínimo for maior que R$ 1000,00 e pertencer à categoria veículos.
 UPDATE LOTE
-  SET arremtado = true
+  SET arrematado = TRUE
   WHERE lance_minimo > 1000 AND id_categoria = 1; 
 
 -- B5. Um comando UPDATE para atualizar dois campos dos registros que satisfazem uma condição.
@@ -103,21 +103,30 @@ UPDATE CATEGORIA
   WHERE id_categoria = 3;
       
 -- B6. Um comando UPDATE para atualizar um campo usando o antigo valor desse campo.
+-- Atualiza todos os lances mínimos em 10%
+UPDATE LOTE
+  SET lance_minimo = lance_minimo * 1.10;
 
 -- B7. Um comando UPDATE para atualizar um campo usando uma função.
 -- Atualiza os nomes das categorias para upper case.
 UPDATE CATEGORIA
-  set nome = UPPER(nome);
+  SET nome = UPPER(nome);
 
 -- B8. Um comando DELETE para remover todos os registros de uma tabela.
 -- Deleta a tabela de telefones dos usuários
 DELETE FROM USUARIO_TELEFONE;
 
 -- B9. Um comando DELETE para remover os registros que satisfazem uma condição simples.
+-- Deleta os registros onde o lance mínimo é menor que R$ 500,00
+DELETE FROM LOTE
+  WHERE lance_minimo < 500;
+
 -- B10. Um comando DELETE para remover os registros que satisfazer uma condição composta.
--- B11. Um comando DELETE para remover um campo usando uma função.
+-- Deleta os registros onde o lote não foi arrematado e o lance mínimo é maior que R$ 1000,00
+DELETE FROM LOTE
+  WHERE arrematado = FALSE AND lance_minimo > 1000;
 
-
-
-
-
+-- B11. Um comando DELETE que utiliza uma função na condição
+-- Deleta os lotes cujo encerramento ocorre no ano de 2026
+DELETE FROM LOTE
+  WHERE YEAR(data_hora_fim) = 2026;
