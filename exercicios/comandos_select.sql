@@ -26,7 +26,7 @@ SELECT dh_consulta, 'R$' || ROUND((valor_consulta * 0.95)::numeric, 2) AS valor 
 --Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
 
 SELECT nome, cpf, email from consultas.pessoa
-  WHERE cpf IN (SELECT cpf FROM consultas.paciente WHERE plano_saude = false) 
+  WHERE cpf IN (SELECT cpf_pessoa FROM consultas.paciente WHERE plano_saude = false) 
 
 --Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
 
@@ -51,6 +51,7 @@ SELECT cpf, nome, email from consultas.pessoa
 --Listar cpf, nome, e-mail e data de nascimento dos pacientes ordenados pela data de nascimento.
 
 SELECT cpf, nome, email, data_nasc from consultas.pessoa
+  WHERE cpf IN (SELECT cpf_pessoa from consultas.paciente)
   ORDER BY data_nasc ASC
 
 --Listar a quantidade de pacientes que não possuem plano de saúde.
@@ -60,17 +61,30 @@ SELECT COUNT(*) from consultas.paciente
   
 --Listar o maior e o menor valor das consultas agendadas para cada dia que contém consulta.
   
+SELECT dh_consulta::date AS dia,
+       MAX(valor_consulta) AS maior,
+       MIN(valor_consulta) AS menor
+FROM consultas.agendamento
+GROUP BY dh_consulta::date
+
 --Listar a média dos valores das consultas agendadas para o mês de Dezembro.
 
+SELECT AVG(valor_consulta) as media from consultas.agendamento
+  WHERE EXTRACT(MONTH from dh_consulta) = 12
   
 --Listar nome e e-mail das pessoas que agendaram alguma consulta para o dia do seu aniversário.
 
 SELECT nome, email from consultas.pessoa
-  WHERE 
+  JOIN consultas.agendamento on consultas.agendamento.cpf_paciente = consultas.pessoa.cpf
+  WHERE EXTRACT(MONTH from dh_consulta) = EXTRACT(MONTH from data_nasc) AND EXTRACT(DAY from dh_consulta) = EXTRACT(DAY from data_nasc)
 
 --Listar o nome, e-mail, cpf dos médicos e as suas respectivas especialidades.
-
-select nome, email, cpf from consultas.pessoa
-  WHERE cpf IN (SELECT cpf from consulta.medico 
+  
+select p.nome, p.email, p.cpf, e.descricao as especialidade from consultas.pessoa p
+  JOIN consultas.medico_especialidade me on me.cpf_medico = p.cpf
+  JOIN consultas.especialidade e on e.id = me.id_especialidade
 
 --Listar a quantidade de consultas para cada médico.
+
+SELECT cpf_medico, COUNT(*) as qtd from consultas.agendamento
+  GROUP BY cpf_medico
