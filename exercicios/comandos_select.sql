@@ -31,7 +31,7 @@ SELECT nome, cpf, email from consultas.pessoa
 --Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
 
 SELECT * from consultas.agendamento
-  WHERE YEAR from dh_consulta = 
+  WHERE EXTRACT(MONTH from dh_agendamento) = EXTRACT(MONTH from dh_consulta)
 
 --Listar cpf, nome e e-mail dos pacientes que não possuem telefone.
 
