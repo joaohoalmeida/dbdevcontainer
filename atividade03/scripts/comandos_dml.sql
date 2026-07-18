@@ -77,3 +77,19 @@ INSERT INTO LOTE_ENDERECO (endereco, id_lote)
            ('Galpão de Eletrônicos, Setor B - Natal/RN', 3),
            ('Zona Sul, Quadra 12 - Natal/RN', 4),
            ('Sítio Boa Vista, Estrada Rural km 5 - RN', 5);
+
+-- B2. Um comando UPDATE para atualizar um campo de todos os registros de uma tabela.
+-- Reajusta em 10% todos os lances mínimos
+UPDATE LOTE
+  SET lance_minimo = lance_minimo * 1.10;
+
+-- B3. Um comando UPDATE para atualizar um campo dos registros que satisfazem uma condição simples.
+-- Atualiza todos os lances mínimos abaixo de R% 900,00 para R% 1000,00
+UPDATE LOTE
+  SET lance_minimo = 1000
+  WHERE lance_minimo < 900;
+
+-- B4. Um comando UPDATE para atualizar um campo dos registros que satisfazer uma condição composta.
+
+
+
