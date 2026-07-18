@@ -34,6 +34,10 @@ SELECT dh_consulta from consultas.agendamento
   WHERE valor_consulta BETWEEN 50 AND 100
 
 --Listar cpf, nome e e-mail dos pacientes que moram em "Natal".
+
+SELECT cpf, nome, email FROM consultas.pessoa 
+  WHERE endereco LIKE '%Natal%'
+
 --Listar cpf, nome, e-mail e data de nascimento dos pacientes ordenados pela data de nascimento.
 --Listar a quantidade de pacientes que não possuem plano de saúde.
 --Listar o maior e o menor valor das consultas agendadas para cada dia que contém consulta.
