@@ -8,7 +8,9 @@ SELECT nome, email, data_nasc from consultas.pessoa
 
 --Listar nome, e-mail e data de nascimento da 3a à 8a pessoa cadastrada.
 
-
+SELECT nome, email, data_nasc from consultas.pessoa
+  OFFSET 2 LIMIT 6
+  
 --Listar nome, e-mail e idade das pessoas cadastradas.
 
 SELECT nome, email, AGE(NOW(), data_nasc) as idade from consultas.pessoa
@@ -19,7 +21,8 @@ SELECT COUNT(*) from consultas.agendamento
 
 --Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
 
-
+SELECT dh_consulta, 'R$' || ROUND((valor_consulta * 0.95)::numeric, 2) AS valor from consultas.agendamento
+  
 --Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
 
 SELECT nome, cpf, email from consultas.pessoa
@@ -58,8 +61,6 @@ SELECT COUNT(*) from consultas.paciente
 --Listar o maior e o menor valor das consultas agendadas para cada dia que contém consulta.
   
 --Listar a média dos valores das consultas agendadas para o mês de Dezembro.
-
-  
 
   
 --Listar nome e e-mail das pessoas que agendaram alguma consulta para o dia do seu aniversário.
