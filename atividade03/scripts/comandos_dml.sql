@@ -105,8 +105,14 @@ UPDATE CATEGORIA
 -- B6. Um comando UPDATE para atualizar um campo usando o antigo valor desse campo.
 
 -- B7. Um comando UPDATE para atualizar um campo usando uma função.
+-- Atualiza os nomes das categorias para upper case.
+UPDATE CATEGORIA
+  set nome = UPPER(nome);
 
 -- B8. Um comando DELETE para remover todos os registros de uma tabela.
+-- Deleta a tabela de telefones dos usuários
+DELETE FROM USUARIO_TELEFONE;
+
 -- B9. Um comando DELETE para remover os registros que satisfazem uma condição simples.
 -- B10. Um comando DELETE para remover os registros que satisfazer uma condição composta.
 -- B11. Um comando DELETE para remover um campo usando uma função.
