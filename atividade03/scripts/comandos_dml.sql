@@ -95,5 +95,23 @@ UPDATE LOTE
   SET arremtado = true
   WHERE lance_minimo > 1000 AND id_categoria = 1; 
 
+-- B5. Um comando UPDATE para atualizar dois campos dos registros que satisfazem uma condição.
+-- Atualiza o nome e a descrição da categoria eletrônicos
+UPDATE CATEGORIA
+  SET nome = 'Eletrônicos e similares',
+      descricao =  'Dispositivos eletrônicos e similares'
+  WHERE id_categoria = 3;
+      
+-- B6. Um comando UPDATE para atualizar um campo usando o antigo valor desse campo.
+
+-- B7. Um comando UPDATE para atualizar um campo usando uma função.
+
+-- B8. Um comando DELETE para remover todos os registros de uma tabela.
+-- B9. Um comando DELETE para remover os registros que satisfazem uma condição simples.
+-- B10. Um comando DELETE para remover os registros que satisfazer uma condição composta.
+-- B11. Um comando DELETE para remover um campo usando uma função.
+
+
+
 
 
