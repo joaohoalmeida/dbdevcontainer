@@ -1,6 +1,6 @@
 --Listar todos os dados de todas as pessoas cadastradas.
 
-SELECT * FROM consultas.pessoa
+SELECT * from consultas.pessoa
 
 --Listar nome, e-mail e data de nascimento das pessoas cadastradas.
 
@@ -14,11 +14,25 @@ SELECT nome, email, data_nasc from consultas.pessoa
 SELECT nome, email, AGE(NOW(), data_nasc) as idade from consultas.pessoa
 
 --Listar a quantidade de agendamentos.
+
+SELECT COUNT(*) from consultas.agendamento
+
 --Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
+
 --Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
+
 --Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
+
 --Listar cpf, nome e e-mail dos pacientes que não possuem telefone.
+
+SELECT cpf, nome, email from consultas.pessoa
+  WHERE telefone IS NULL
+
 --Listar a data das consultas cujo o valor está entre R$ 50.00 e R$ 100.00.
+
+SELECT dh_consulta from consultas.agendamento
+  WHERE valor_consulta BETWEEN 50 AND 100
+
 --Listar cpf, nome e e-mail dos pacientes que moram em "Natal".
 --Listar cpf, nome, e-mail e data de nascimento dos pacientes ordenados pela data de nascimento.
 --Listar a quantidade de pacientes que não possuem plano de saúde.
