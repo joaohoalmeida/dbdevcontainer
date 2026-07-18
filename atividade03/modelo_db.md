@@ -1,5 +1,10 @@
 # Dicionário de Dados
 
+
+## Diagrama Relacional
+
+![Diagrama ER](./diagram_er.png)
+
 ## USUARIO
 
 | Atributo | Tipo | Chave | Nulo | Descrição |
