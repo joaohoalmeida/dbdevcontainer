@@ -90,6 +90,10 @@ UPDATE LOTE
   WHERE lance_minimo < 900;
 
 -- B4. Um comando UPDATE para atualizar um campo dos registros que satisfazer uma condição composta.
+-- Atualiza o status do lote se o valor mínimo for maior que R% 1000,00 e pertencer a categoria veículos.
+UPDATE LOTE
+  SET arremtado = true
+  WHERE lance_minimo > 1000 AND id_categoria = 1; 
 
 
 
